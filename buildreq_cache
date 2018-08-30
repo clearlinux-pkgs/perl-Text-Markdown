@@ -1,0 +1,7 @@
+1.000031
+perl(List::MoreUtils)
+perl(Module::Install)
+perl(Sub::Uplevel)
+perl(Test::Differences)
+perl(Test::Exception)
+perl(Text::Diff)
