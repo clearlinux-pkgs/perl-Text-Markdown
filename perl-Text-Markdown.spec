@@ -4,12 +4,12 @@
 #
 Name     : perl-Text-Markdown
 Version  : 1.000031
-Release  : 2
+Release  : 3
 URL      : https://cpan.metacpan.org/authors/id/B/BO/BOBTFISH/Text-Markdown-1.000031.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/B/BO/BOBTFISH/Text-Markdown-1.000031.tar.gz
 Summary  : 'Convert Markdown syntax to (X)HTML'
 Group    : Development/Tools
-License  : BSD-3-Clause bsd
+License  : BSD-3-Clause
 Requires: perl-Text-Markdown-bin
 Requires: perl-Text-Markdown-man
 BuildRequires : buildreq-cpan
