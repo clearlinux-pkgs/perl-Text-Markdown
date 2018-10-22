@@ -4,15 +4,18 @@
 #
 Name     : perl-Text-Markdown
 Version  : 1.000031
-Release  : 3
+Release  : 4
 URL      : https://cpan.metacpan.org/authors/id/B/BO/BOBTFISH/Text-Markdown-1.000031.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/B/BO/BOBTFISH/Text-Markdown-1.000031.tar.gz
 Summary  : 'Convert Markdown syntax to (X)HTML'
 Group    : Development/Tools
 License  : BSD-3-Clause
-Requires: perl-Text-Markdown-bin
-Requires: perl-Text-Markdown-man
+Requires: perl-Text-Markdown-bin = %{version}-%{release}
+Requires: perl-Text-Markdown-license = %{version}-%{release}
+Requires: perl-Text-Markdown-man = %{version}-%{release}
 BuildRequires : buildreq-cpan
+BuildRequires : perl(Algorithm::Diff)
+BuildRequires : perl(Exporter::Tiny)
 BuildRequires : perl(List::MoreUtils)
 BuildRequires : perl(Module::Install)
 BuildRequires : perl(Sub::Uplevel)
@@ -30,7 +33,8 @@ my $html = markdown($text);
 %package bin
 Summary: bin components for the perl-Text-Markdown package.
 Group: Binaries
-Requires: perl-Text-Markdown-man
+Requires: perl-Text-Markdown-license = %{version}-%{release}
+Requires: perl-Text-Markdown-man = %{version}-%{release}
 
 %description bin
 bin components for the perl-Text-Markdown package.
@@ -39,20 +43,19 @@ bin components for the perl-Text-Markdown package.
 %package dev
 Summary: dev components for the perl-Text-Markdown package.
 Group: Development
-Requires: perl-Text-Markdown-bin
-Provides: perl-Text-Markdown-devel
+Requires: perl-Text-Markdown-bin = %{version}-%{release}
+Provides: perl-Text-Markdown-devel = %{version}-%{release}
 
 %description dev
 dev components for the perl-Text-Markdown package.
 
 
-%package doc
-Summary: doc components for the perl-Text-Markdown package.
-Group: Documentation
-Requires: perl-Text-Markdown-man
+%package license
+Summary: license components for the perl-Text-Markdown package.
+Group: Default
 
-%description doc
-doc components for the perl-Text-Markdown package.
+%description license
+license components for the perl-Text-Markdown package.
 
 
 %package man
@@ -88,12 +91,12 @@ make TEST_VERBOSE=1 test
 
 %install
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/perl-Text-Markdown
-cp License.text %{buildroot}/usr/share/doc/perl-Text-Markdown/License.text
+mkdir -p %{buildroot}/usr/share/package-licenses/perl-Text-Markdown
+cp License.text %{buildroot}/usr/share/package-licenses/perl-Text-Markdown/License.text
 if test -f Makefile.PL; then
-make pure_install PERL_INSTALL_ROOT=%{buildroot}
+make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
-./Build install --installdirs=site --destdir=%{buildroot}
+./Build install --installdirs=vendor --destdir=%{buildroot}
 fi
 find %{buildroot} -type f -name .packlist -exec rm -f {} ';'
 find %{buildroot} -depth -type d -exec rmdir {} 2>/dev/null ';'
@@ -102,7 +105,7 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/site_perl/5.26.1/Text/Markdown.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Text/Markdown.pm
 
 %files bin
 %defattr(-,root,root,-)
@@ -112,10 +115,10 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 %defattr(-,root,root,-)
 /usr/share/man/man3/Text::Markdown.3
 
-%files doc
+%files license
 %defattr(0644,root,root,0755)
-%doc /usr/share/doc/perl\-Text\-Markdown/*
+/usr/share/package-licenses/perl-Text-Markdown/License.text
 
 %files man
-%defattr(-,root,root,-)
+%defattr(0644,root,root,0755)
 /usr/share/man/man1/Markdown.pl.1

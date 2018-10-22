@@ -1,4 +1,6 @@
 1.000031
+perl(Algorithm::Diff)
+perl(Exporter::Tiny)
 perl(List::MoreUtils)
 perl(Module::Install)
 perl(Sub::Uplevel)
