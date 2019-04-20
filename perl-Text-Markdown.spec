@@ -4,10 +4,10 @@
 #
 Name     : perl-Text-Markdown
 Version  : 1.000031
-Release  : 5
+Release  : 6
 URL      : https://cpan.metacpan.org/authors/id/B/BO/BOBTFISH/Text-Markdown-1.000031.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/B/BO/BOBTFISH/Text-Markdown-1.000031.tar.gz
-Summary  : 'Convert Markdown syntax to (X)HTML'
+Summary  : Perl/CPAN Module Text::Markdown
 Group    : Development/Tools
 License  : BSD-3-Clause
 Requires: perl-Text-Markdown-bin = %{version}-%{release}
@@ -34,7 +34,6 @@ my $html = markdown($text);
 Summary: bin components for the perl-Text-Markdown package.
 Group: Binaries
 Requires: perl-Text-Markdown-license = %{version}-%{release}
-Requires: perl-Text-Markdown-man = %{version}-%{release}
 
 %description bin
 bin components for the perl-Text-Markdown package.
@@ -45,6 +44,7 @@ Summary: dev components for the perl-Text-Markdown package.
 Group: Development
 Requires: perl-Text-Markdown-bin = %{version}-%{release}
 Provides: perl-Text-Markdown-devel = %{version}-%{release}
+Requires: perl-Text-Markdown = %{version}-%{release}
 
 %description dev
 dev components for the perl-Text-Markdown package.
@@ -105,7 +105,7 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.28.1/Text/Markdown.pm
+/usr/lib/perl5/vendor_perl/5.28.2/Text/Markdown.pm
 
 %files bin
 %defattr(-,root,root,-)
