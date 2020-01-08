@@ -4,15 +4,16 @@
 #
 Name     : perl-Text-Markdown
 Version  : 1.000031
-Release  : 6
+Release  : 7
 URL      : https://cpan.metacpan.org/authors/id/B/BO/BOBTFISH/Text-Markdown-1.000031.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/B/BO/BOBTFISH/Text-Markdown-1.000031.tar.gz
-Summary  : Perl/CPAN Module Text::Markdown
+Summary  : 'Convert Markdown syntax to (X)HTML'
 Group    : Development/Tools
 License  : BSD-3-Clause
 Requires: perl-Text-Markdown-bin = %{version}-%{release}
 Requires: perl-Text-Markdown-license = %{version}-%{release}
 Requires: perl-Text-Markdown-man = %{version}-%{release}
+Requires: perl-Text-Markdown-perl = %{version}-%{release}
 BuildRequires : buildreq-cpan
 BuildRequires : perl(Algorithm::Diff)
 BuildRequires : perl(Exporter::Tiny)
@@ -66,14 +67,24 @@ Group: Default
 man components for the perl-Text-Markdown package.
 
 
+%package perl
+Summary: perl components for the perl-Text-Markdown package.
+Group: Default
+Requires: perl-Text-Markdown = %{version}-%{release}
+
+%description perl
+perl components for the perl-Text-Markdown package.
+
+
 %prep
 %setup -q -n Text-Markdown-1.000031
+cd %{_builddir}/Text-Markdown-1.000031
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
+export LANG=C.UTF-8
 if test -f Makefile.PL; then
 %{__perl} Makefile.PL
 make  %{?_smp_mflags}
@@ -83,7 +94,7 @@ else
 fi
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
@@ -92,7 +103,7 @@ make TEST_VERBOSE=1 test
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/perl-Text-Markdown
-cp License.text %{buildroot}/usr/share/package-licenses/perl-Text-Markdown/License.text
+cp %{_builddir}/Text-Markdown-1.000031/License.text %{buildroot}/usr/share/package-licenses/perl-Text-Markdown/cfbdb59a10e2b5b650837ed03373b40cfce44171
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
@@ -105,7 +116,6 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.28.2/Text/Markdown.pm
 
 %files bin
 %defattr(-,root,root,-)
@@ -117,8 +127,12 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/perl-Text-Markdown/License.text
+/usr/share/package-licenses/perl-Text-Markdown/cfbdb59a10e2b5b650837ed03373b40cfce44171
 
 %files man
 %defattr(0644,root,root,0755)
 /usr/share/man/man1/Markdown.pl.1
+
+%files perl
+%defattr(-,root,root,-)
+/usr/lib/perl5/vendor_perl/5.30.1/Text/Markdown.pm
