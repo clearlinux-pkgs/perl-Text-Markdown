@@ -4,7 +4,7 @@
 #
 Name     : perl-Text-Markdown
 Version  : 1.000031
-Release  : 8
+Release  : 9
 URL      : https://cpan.metacpan.org/authors/id/B/BO/BOBTFISH/Text-Markdown-1.000031.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/B/BO/BOBTFISH/Text-Markdown-1.000031.tar.gz
 Summary  : 'Convert Markdown syntax to (X)HTML'
@@ -135,4 +135,4 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.30.2/Text/Markdown.pm
+/usr/lib/perl5/vendor_perl/5.30.3/Text/Markdown.pm
