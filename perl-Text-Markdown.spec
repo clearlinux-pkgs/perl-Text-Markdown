@@ -7,7 +7,7 @@
 #
 Name     : perl-Text-Markdown
 Version  : 1.000031
-Release  : 18
+Release  : 19
 URL      : https://cpan.metacpan.org/authors/id/B/BO/BOBTFISH/Text-Markdown-1.000031.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/B/BO/BOBTFISH/Text-Markdown-1.000031.tar.gz
 Summary  : 'Convert Markdown syntax to (X)HTML'
